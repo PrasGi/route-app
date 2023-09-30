@@ -1,40 +1,36 @@
-<!DOCTYPE html>
-<html>
+@extends('partials.index')
 
-<head>
-    <!-- Atur meta-tag, tautan gaya CSS, dan lainnya sesuai kebutuhan Anda -->
-    <meta charset="utf-8">
-    <title>Map</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    <!-- Letakkan script Leaflet di sini -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-    <style>
-        #map {
-            height: 180px;
-        }
-    </style>
-
-    {{-- @vite('resources/js/leaflet.js') --}}
-</head>
-
-<body>
-    <!-- Konten halaman Anda di sini -->
-    <div class="row justify-content-center">
-        <div class="col-5">
-            <div id="map" style="height: 400px;"></div>
+@section('content')
+    @if ($datas == null)
+        <div class="text-center">
+            Empty histories
         </div>
-    </div>
-
-    <script>
-        var map = L.map('map').setView([51.505, -0.09], 13);
-    </script>
-
-</body>
-
-</html>
+    @else
+        @foreach ($datas as $data)
+            <div class="card shadow">
+                <div class="card-header">
+                    History booking
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ $data['name'] }}</h5>
+                    <p class="card-text">{{ $data['description'] }}</p>
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="{{ $data['image'] ? $data['image'] : asset('img/empty.jpg') }}" style="width: 200px">
+                        </div>
+                        <div class="col-8 pt-3">
+                            <p> <b>Total</b>: Rp. {{ $data['total'] }}</p>
+                            <p> <b>Date</b>: {{ $data['date'] }}</p>
+                            @if ($data['conrimed_at'] == 'confirmed')
+                                <span class="badge text-bg-success">{{ $data['conrimed_at'] }}</span>
+                            @else
+                                <span class="badge text-bg-warning">{{ $data['conrimed_at'] }}</span>
+                            @endif
+                            {{-- <span class="badge text-bg-warning">Waiting</span> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endif
+@endsection

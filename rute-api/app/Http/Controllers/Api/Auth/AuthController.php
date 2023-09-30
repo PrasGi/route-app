@@ -22,7 +22,7 @@ class AuthController extends Controller
             ], 422);
         }
 
-        $payload = $request->only('name', 'email', 'password', 'category_id');
+        $payload = $request->only('name', 'email', 'password');
         $payload['password'] = Hash::make($payload['password']);
         $payload['uuid'] = Uuid::uuid4()->toString();
 

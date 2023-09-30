@@ -34,6 +34,8 @@ class UpdateRequest extends FormRequest
             'long_route' => 'nullable|integer',
             'height_start' => 'nullable|integer',
             'height_end' => 'nullable|integer',
+            'category_id' => 'nullable|exists:categories,id',
+            'level' => 'nullable|in:easy,medium,hard',
         ];
     }
 }

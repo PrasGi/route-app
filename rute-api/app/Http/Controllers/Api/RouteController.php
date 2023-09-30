@@ -36,6 +36,9 @@ class RouteController extends Controller
             'description' => $request->description ?? null,
             'height_start' => $request->height_start ?? null,
             'height_end' => $request->height_end ?? null,
+            'user_id' => $request->user_id ?? null,
+            'category_id' => $request->category_id ?? null,
+            'level' => $request->level ?? null,
         ];
 
         $routes = $this->routeModel::query();
@@ -54,6 +57,18 @@ class RouteController extends Controller
 
         if ($filter['height_end']) {
             $routes->where('height_end', '<=', $filter['height_end']);
+        }
+
+        if ($filter['user_id']) {
+            $routes->where('user_id', $filter['user_id']);
+        }
+
+        if ($filter['category_id']) {
+            $routes->where('category_id', $filter['category_id']);
+        }
+
+        if ($filter['level']) {
+            $routes->where('level', $filter['level']);
         }
 
         $datas = $routes->with('galeries')->orderBy('created_at', 'desc')->paginate($request->per_page ?? 25);
@@ -84,7 +99,11 @@ class RouteController extends Controller
                 'long_route',
                 'height_start',
                 'height_end',
+                'category_id',
+                'level',
             ]);
+
+            $payload['user_id'] = auth()->user()->uuid;
 
             $route = $this->routeModel->create($payload);
 
@@ -137,6 +156,8 @@ class RouteController extends Controller
             'long_route',
             'height_start',
             'height_end',
+            'category_id',
+            'level',
         ]);
 
         if ($route->update($payload)) {

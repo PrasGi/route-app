@@ -34,6 +34,8 @@ class CreateRequest extends FormRequest
             'long_route' => 'required|string',
             'height_start' => 'required|numeric',
             'height_end' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+            'level' => 'required|in:easy,medium,hard',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120', // Validate each image in the array
         ];
     }

@@ -37,7 +37,6 @@ class RegisterRequest extends FormRequest
                 'unique:users,email',
             ],
             'password' => 'required|string|min:8',
-            'category_id' => 'required|exists:categories,id',
         ];
     }
 }

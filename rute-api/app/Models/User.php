@@ -47,8 +47,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function category()
+    public function routes()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->hasMany(Route::class, 'user_id', 'uuid');
     }
 }

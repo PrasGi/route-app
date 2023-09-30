@@ -13,8 +13,8 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
-    public function user()
+    public function routes()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Route::class);
     }
 }

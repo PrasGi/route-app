@@ -29,4 +29,9 @@ class Route extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'uuid');
     }
+
+    public function categories()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'uuid');
+    }
 }
