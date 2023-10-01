@@ -20,6 +20,9 @@ class RouteResource extends JsonResource
             'description' => $this->description,
             'height_start' => $this->height_start,
             'height_end' => $this->height_end,
+            'long_route' => $this->long_route,
+            'category' => $this->categories->name,
+            'level' => $this->level,
             'galeries' => $this->galeries->map(function ($galery) {
                 return [
                     'id' => $galery->id,

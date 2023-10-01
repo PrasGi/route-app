@@ -18,17 +18,42 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 shadow">
-                <div id="map"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <button class="btn btn-primary" onclick="getLocation()">Get My Location</button>
-                <button class="btn btn-success" id="pickLocation">Pick Location</button>
-            </div>
+    <div class="row">
+        <div class="col-8">
+            <form action="{{ route('routes.store') }}" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="image" name="image[]" multiple>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="latitude" class="form-label">Latitude</label>
+                            <input type="text" class="form-control" id="latitude" name="latitude" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="longitude" class="form-label">Longitude</label>
+                            <input type="text" class="form-control" id="longitude" name="longitude" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 shadow">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" onclick="getLocation()">Get My Location</button>
+                            <button class="btn btn-success" id="pickLocation">Pick Location</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -85,7 +110,7 @@
             } else {
                 alert(
                     'Pilih lokasi terlebih dahulu dengan tombol "Get My Location" atau dengan mengklik pada peta.'
-                    );
+                );
             }
         });
     </script>

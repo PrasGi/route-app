@@ -10,20 +10,13 @@
             </a>
         </li><!-- End Dashboard Nav -->
 
-        <li class="nav-heading">booking</li>
+        <li class="nav-heading">Routes</li>
 
         <li class="nav-item">
-            <a class="nav-link {{ Request::route()->getName() == 'food.index' ? 'active' : '' }} collapsed"
-                href="{{ route('food.index') }}">
-                <i class="bi bi-egg-fill"></i>
-                <span>Food</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ Request::route()->getName() == 'car.index' ? 'active' : '' }} collapsed"
-                href="{{ route('car.index') }}">
-                <i class="bi bi-car-front"></i>
-                <span>Car</span>
+            <a class="nav-link {{ Request::route()->getName() == 'routes.index' ? 'active' : '' }} collapsed"
+                href="{{ route('routes.index') }}">
+                <i class="bi bi-arrow-90deg-right"></i>
+                <span>My Route</span>
             </a>
         </li>
     </ul>

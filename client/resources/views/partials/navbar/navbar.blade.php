@@ -4,7 +4,7 @@
     <div class="d-flex align-items-center justify-content-between">
         <i class="bi bi-list toggle-sidebar-btn"></i>
         <a href="#" class="logo d-flex align-items-center">
-            <span class="d-none d-lg-block fs-3 ms-3">Booking App</span>
+            <span class="d-none d-lg-block fs-3 ms-3">Routes App</span>
         </a>
     </div><!-- End Logo -->
 
