@@ -34,4 +34,9 @@ class Route extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
+    public function village()
+    {
+        return $this->belongsTo(Village::class, 'village_id', 'id');
+    }
 }

@@ -23,6 +23,7 @@ class DashboardController extends Controller
             'query' => [
                 'level' => $request->level ?? '',
                 'category_id' => $request->category_id ?? '',
+                'village_id' => $request->village_id ?? '',
             ]
         ]);
 
@@ -39,10 +40,18 @@ class DashboardController extends Controller
             abort(500, $bodyCategory['message']);
         }
 
+        $responseVillages = $this->client->get(env('API_URL') . '/villages');
+        $bodyVillages = json_decode($responseVillages->getBody()->getContents(), true);
+
+        if (!$bodyVillages['status']) {
+            abort(500, $bodyVillages['message']);
+        }
+
         $datas = $body['data']['routes']['data'];
         $meta = $body['data']['routes']['meta'];
         $categories = $bodyCategory['data']['categories'];
+        $villages = $bodyVillages['data']['data'];
 
-        return view('welcome', compact('meta', 'datas', 'categories'));
+        return view('welcome', compact('meta', 'datas', 'categories', 'villages'));
     }
 }

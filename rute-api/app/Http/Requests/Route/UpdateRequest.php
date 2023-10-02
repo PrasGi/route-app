@@ -36,6 +36,7 @@ class UpdateRequest extends FormRequest
             'height_end' => 'nullable|integer',
             'category_id' => 'nullable|exists:categories,id',
             'level' => 'nullable|in:easy,medium,hard',
+            'village_id' => 'nullable|exists:villages,id',
         ];
     }
 }

@@ -28,6 +28,7 @@ Route::middleware(['login'])->group(function () {
 
     Route::get('/routes', [RouteController::class, 'index'])->name('routes.index');
     Route::post('/routes', [RouteController::class, 'store'])->name('routes.store');
+    Route::delete('/routes/{id}', [RouteController::class, 'destroy'])->name('routes.destroy');
 
     Route::get('/list/routes/{id}', [RouteController::class, 'listRoutes'])->name('list.routes.index');
     Route::post('/list/routes', [RouteController::class, 'storeListRoutes'])->name('list.routes.store');

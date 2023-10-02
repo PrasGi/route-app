@@ -49,7 +49,15 @@
                         <div class="mt-4">
                             <a href="{{ route('list.routes.index', $data['id']) }}" class="btn btn-success"><i
                                     class="bi bi-plus"></i> Add marker</a>
-                            <a href="{{ route('map.index', $data['id']) }}" class="btn btn-primary">Go maps</a>
+                            <a href="{{ route('map.index', $data['id']) }}" class="btn btn-primary"><i
+                                    class="bi bi-map"></i> Go maps</a>
+                            <form action="{{ route('routes.destroy', $data['id']) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger mt-2"><i class="bi bi-trash"></i>
+                                    Delete</button>
+                            </form>
                         </div>
                     </div>
                     <div class="col pt-3">
@@ -58,6 +66,7 @@
                     </div>
                     <div class="col pt-3">
                         <p> <b>Long Route</b>: {{ $data['long_route'] }}</p>
+                        <p> <b>Village</b>: {{ $data['village_name'] }}</p>
                     </div>
                 </div>
             </div>
@@ -105,6 +114,15 @@
                                 <!-- Tambahkan pilihan kategori di sini -->
                                 @foreach ($categories as $category)
                                     <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Vilage</label>
+                            <select class="form-select" id="category" name="village_id">
+                                <!-- Tambahkan pilihan kategori di sini -->
+                                @foreach ($villages as $village)
+                                    <option value="{{ $village['id'] }}">{{ $village['name'] }}</option>
                                 @endforeach
                             </select>
                         </div>

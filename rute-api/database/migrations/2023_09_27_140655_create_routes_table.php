@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('height_start')->nullable();
             $table->integer('height_end')->nullable();
             $table->enum('level', ['easy', 'medium', 'hard']);
+            $table->char('village_id');
+            $table->foreign('village_id')->references('id')->on('villages');
             $table->uuid('user_id');
             $table->foreign('user_id')->references('uuid')->on('users');
             $table->uuid('category_id');

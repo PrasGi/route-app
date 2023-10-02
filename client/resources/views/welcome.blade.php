@@ -3,7 +3,7 @@
 @section('content')
     <form action="{{ route('dashboard') }}" method="GET">
         <div class="row mb-3">
-            <div class="col-md-5">
+            <div class="col-md-3">
                 <select class="form-select" aria-label="Select Category" name="category_id">
                     <option value="" selected>Select Category</option>
                     @foreach ($categories as $category)
@@ -12,7 +12,7 @@
                     <!-- Tambahkan opsi sesuai dengan kategori yang sesuai -->
                 </select>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
                 <select class="form-select" aria-label="Select Level" name="level">
                     <option value="" selected>Select Level</option>
                     <option value="easy">easy</option>
@@ -21,7 +21,16 @@
                     <!-- Tambahkan opsi sesuai dengan level yang sesuai -->
                 </select>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
+                <select class="form-select" id="category" name="village_id">
+                    <!-- Tambahkan pilihan kategori di sini -->
+                    <option value="" selected>Select Village</option>
+                    @foreach ($villages as $village)
+                        <option value="{{ $village['id'] }}">{{ $village['name'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-3">
                 <button type="submit" class="btn btn-primary">Filter</button>
             </div>
         </div>
@@ -65,7 +74,8 @@
                         <p> <b>Height Start</b>: {{ $data['height_start'] }}</p>
                         <p> <b>Height End</b>: {{ $data['height_end'] }}</p>
                         <div class="mt-4">
-                            <a href="{{ route('map.index', $data['id']) }}" class="btn btn-primary">Go maps</a>
+                            <a href="{{ route('map.index', $data['id']) }}" class="btn btn-primary"><i
+                                    class="bi bi-map"></i> Go maps</a>
                         </div>
                     </div>
                     <div class="col pt-3">
@@ -74,6 +84,7 @@
                     </div>
                     <div class="col pt-3">
                         <p> <b>Long Route</b>: {{ $data['long_route'] }}</p>
+                        <p> <b>Village</b>: {{ $data['village_name'] }}</p>
                     </div>
                 </div>
             </div>

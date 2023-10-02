@@ -38,11 +38,19 @@ class RouteController extends Controller
             abort(500, $bodyCategory['message']);
         }
 
+        $responseVillages = $this->client->get(env('API_URL') . '/villages');
+        $bodyVillages = json_decode($responseVillages->getBody()->getContents(), true);
+
+        if (!$bodyVillages['status']) {
+            abort(500, $bodyVillages['message']);
+        }
+
         $datas = $body['data']['routes']['data'];
         $meta = $body['data']['routes']['meta'];
         $categories = $bodyCategory['data']['categories'];
+        $villages = $bodyVillages['data']['data'];
 
-        return view('pages.route', compact('meta', 'datas', 'categories'));
+        return view('pages.route', compact('meta', 'datas', 'categories', 'villages'));
     }
 
     public function store(Request $request)
@@ -55,6 +63,7 @@ class RouteController extends Controller
             'height_start' => 'required',
             'height_end' => 'required',
             'level' => 'required',
+            'village_id' => 'required',
             'image.*' => 'required|image|mimes:jpeg,png,jpg|max:5120', // Notice the use of image.* to validate multiple images.
         ]);
 
@@ -107,6 +116,10 @@ class RouteController extends Controller
                         'name' => 'level',
                         'contents' => $request->level,
                     ],
+                    [
+                        'name' => 'village_id',
+                        'contents' => $request->village_id,
+                    ]
                 ],
                 $imageData // Add the image data array here.
             ),
@@ -119,6 +132,23 @@ class RouteController extends Controller
         }
 
         return redirect()->back()->with('success', 'Berhasil menambahkan rute baru');
+    }
+
+    public function destroy($id)
+    {
+        $response = $this->client->delete(env('API_URL') . '/routes/' . $id, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . Cache::get('auth_token')
+            ]
+        ]);
+
+        $body = json_decode($response->getBody()->getContents(), true);
+
+        if (!$body['status']) {
+            abort(500, $body['message']);
+        }
+
+        return redirect()->back()->with('success', 'Berhasil menghapus rute');
     }
 
     public function listRoutes($id)

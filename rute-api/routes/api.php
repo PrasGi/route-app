@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\GaleryController;
+use App\Http\Controllers\Api\RegionController;
 use App\Http\Controllers\Api\RouteController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ Route::prefix('/auth')->group(function () {
 });
 
 Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/villages', [RegionController::class, 'indexVillage']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/auth')->group(function () {

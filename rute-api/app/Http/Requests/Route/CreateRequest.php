@@ -36,6 +36,7 @@ class CreateRequest extends FormRequest
             'height_end' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
             'level' => 'required|in:easy,medium,hard',
+            'village_id' => 'required|exists:villages,id',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120', // Validate each image in the array
         ];
     }

@@ -39,6 +39,7 @@ class RouteController extends Controller
             'user_id' => $request->user_id ?? null,
             'category_id' => $request->category_id ?? null,
             'level' => $request->level ?? null,
+            'village_id' => $request->village_id ?? null,
         ];
 
         $routes = $this->routeModel::query();
@@ -71,6 +72,10 @@ class RouteController extends Controller
             $routes->where('level', $filter['level']);
         }
 
+        if ($filter['village_id']) {
+            $routes->where('village_id', $filter['village_id']);
+        }
+
         $datas = $routes->with('galeries')->orderBy('created_at', 'desc')->paginate($request->per_page ?? 25);
 
         return response()->json([
@@ -101,6 +106,7 @@ class RouteController extends Controller
                 'height_end',
                 'category_id',
                 'level',
+                'village_id'
             ]);
 
             $payload['user_id'] = auth()->user()->uuid;
@@ -158,6 +164,7 @@ class RouteController extends Controller
             'height_end',
             'category_id',
             'level',
+            'village_id'
         ]);
 
         if ($route->update($payload)) {
